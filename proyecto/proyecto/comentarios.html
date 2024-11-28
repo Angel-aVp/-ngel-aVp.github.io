@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios</title>
+</head>
+<body>
+    <h1>Deja tu comentario</h1>
+
+    <!-- Cambia el atributo 'action' para que apunte al archivo guardar_comentarios.php -->
+    <form action="guardar_comentarios.php" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <label for="comentario">Comentario:</label><br>
+        <textarea id="comentario" name="comentario" rows="4" cols="50" required></textarea><br>
+
+        <button type="submit">Enviar Comentario</button>
+    </form>
+
+    <h2>Comentarios</h2>
+    <div id="comentarios">
+        <?php 
+        // Asegúrate de incluir la lógica para obtener los comentarios desde guardar_comentarios.php
+        include 'guardar_comentarios.php'; 
+
+        // Asumiendo que $comentarios está definido en guardar_comentarios.php
+        foreach ($comentarios as $comentario): ?>
+            <div>
+                <strong><?php echo htmlspecialchars($comentario['nombre']); ?></strong>
+                <em>el <?php echo $comentario['fecha']; ?></em>
+                <p><?php echo nl2br(htmlspecialchars($comentario['comentario'])); ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Botón para volver al menú principal -->
+    <a href="HTML.html" class="back-button">Volver al menú principal</a>
+</body>
+</html>
